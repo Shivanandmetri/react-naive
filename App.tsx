@@ -1,10 +1,13 @@
-import {Text, View} from 'react-native';
 import React from 'react';
-import Home from './src/components/weatherApp/Home';
-import Start from './src/components/weatherApp/Start';
+import StackNavigation from './src/components/weatherApp/Navigation';
+import ContextProvider from './src/components/weatherApp/Context';
 
 const App = () => {
-  return <Start />;
+  return (
+    <ContextProvider>
+      <StackNavigation />
+    </ContextProvider>
+  );
 };
 
 export default App;
