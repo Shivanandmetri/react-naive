@@ -1,6 +1,6 @@
 import React from 'react';
-import StackNavigation from './src/components/weatherApp/Navigation';
-import ContextProvider from './src/components/weatherApp/Context';
+import StackNavigation from './src/weatherApp/Navigation';
+import ContextProvider from './src/weatherApp/Context';
 
 const App = () => {
   return (

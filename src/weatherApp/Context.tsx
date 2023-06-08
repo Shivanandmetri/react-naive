@@ -1,5 +1,5 @@
 import React, {createContext, useCallback, useMemo, useState} from 'react';
-import axiosInstance from '../../utils/axiosInstance';
+import axiosInstance from '../utils/axiosInstance';
 
 export const WeatherContext = createContext();
 
@@ -160,10 +160,8 @@ const ContextProvider = ({children}) => {
   const loadProducts = useCallback(async () => {
     try {
       const res = await axiosInstance.get(`${text}&days=3&aqi=no&alerts=no`);
-      console.log(res.data);
+      // console.log(res.data);
       setweatherData(res.data);
-      console.log(res.data.forecast.forecastday[0].day.condition.icon);
-      console.log(res.data.forecast.forecastday[1].day.condition.icon);
       setForecast([
         {
           week: 'Saturday',
@@ -313,8 +311,6 @@ const ContextProvider = ({children}) => {
           val: `${res.data.current.humidity} %`,
         },
       ]);
-      // console.log(forecast);
-      // console.log(res.data.forecast);
     } catch (err) {
       seterror(error);
     }

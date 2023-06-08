@@ -15,7 +15,7 @@ const Start = ({navigation}) => {
   useEffect(() => {
     const getData = setTimeout(() => {
       loadProducts();
-    }, 2000);
+    }, 1500);
     return () => clearTimeout(getData);
   }, [text]);
 
@@ -30,7 +30,7 @@ const Start = ({navigation}) => {
           onChangeText={setText}
         />
         <Image
-          source={require('../../assets/celsius.png')}
+          source={require('../assets/celsius.png')}
           style={{height: 35, width: 35, tintColor: 'white'}}
         />
       </View>
@@ -73,14 +73,14 @@ const Start = ({navigation}) => {
               marginTop: 10,
             }}>
             <Image
-              source={require('../../assets/down-arrow.png')}
+              source={require('../assets/down-arrow.png')}
               style={{height: 20, width: 20}}
             />
             <Text>
               {weatherData.forecast.forecastday[0].day.mintemp_c}&deg;
             </Text>
             <Image
-              source={require('../../assets/arrow.png')}
+              source={require('../assets/arrow.png')}
               style={{height: 20, width: 20}}
             />
             <Text>
@@ -165,7 +165,7 @@ const Start = ({navigation}) => {
         style={{alignItems: 'center', marginVertical: 20}}
         onPress={() => navigation.navigate('second')}>
         <Image
-          source={require('../../assets/arrow.png')}
+          source={require('../assets/arrow.png')}
           style={{height: 25, width: 25, tintColor: '#FFFFFF'}}
         />
       </Pressable>

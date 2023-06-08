@@ -1,38 +1,42 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, SafeAreaView, StyleSheet} from 'react-native';
 import React, {useContext, useEffect} from 'react';
 import {WeatherContext} from './Context';
 
+////////FlashPage///////
+
 const Home = ({navigation}) => {
   const {loadProducts} = useContext(WeatherContext);
-  setTimeout(() => navigation.navigate('start'), 1000);
+  setTimeout(() => navigation.navigate('start'), 1500);
 
   useEffect(() => {
     loadProducts();
   }, []);
 
   return (
-    <View style={styles.weather}>
+    <SafeAreaView style={styles.container}>
       <Image
-        source={require('../../assets/weatherapp.png')}
+        source={require('../assets/weatherapp.png')}
         style={{height: 100, width: 100}}
       />
-      <Image
-        source={require('../../assets/weatherapi.png')}
-        style={{height: 100, width: 100, bottom: 0, position: 'absolute'}}
-      />
-    </View>
+      <Image source={require('../assets/weatherapi.png')} style={styles.logo} />
+    </SafeAreaView>
   );
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
-  weather: {
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
     backgroundColor: 'white',
-    width: '100%',
-    height: '100%',
+  },
+  logo: {
+    height: 80,
+    width: 100,
+    bottom: 0,
+    position: 'absolute',
   },
 });

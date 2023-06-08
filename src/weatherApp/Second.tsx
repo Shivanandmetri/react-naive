@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Pressable, Image, FlatList} from 'react-native';
+import {View, Text, Pressable, Image, FlatList, SafeAreaView} from 'react-native';
 import React, {useContext} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {WeatherContext} from './Context';
@@ -7,17 +7,15 @@ import {WeatherContext} from './Context';
 const Second = ({navigation}) => {
   const {weatherData, time, sunrise, sunset, Forecast} =
     useContext(WeatherContext);
-  // console.log(forecast);
-  console.log('second page', Forecast);
   return (
     <LinearGradient
       style={{flex: 1}}
       colors={['#59C5D0', '#4EE6F6', '#09ABF7']}>
-      <View>
+      <SafeAreaView>
         <View style={{alignItems: 'center', marginTop: 20}}>
           <Pressable onPress={() => navigation.navigate('start')}>
             <Image
-              source={require('../../assets/down-arrow.png')}
+              source={require('../assets/down-arrow.png')}
               style={{height: 25, width: 25, tintColor: '#FFFFFF'}}
             />
           </Pressable>
@@ -137,7 +135,7 @@ const Second = ({navigation}) => {
             />
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 };
