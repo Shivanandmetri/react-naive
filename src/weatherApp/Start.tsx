@@ -1,15 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, TextInput, Image, FlatList, Pressable} from 'react-native';
+import {View, Text, TextInput, Image, Pressable} from 'react-native';
 import React, {useContext, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {StyleSheet} from 'react-native';
 import {WeatherContext} from './Context';
+import Location from '../components/Location';
+import HourReport from '../components/HourReport';
+import SunRiseSet from '../components/SunRiseSet';
 
 const date = new Date().toString().split(' ');
-// console.log(date.slice(0, 3).join(' '));
+///////////Home/////////////
 
 const Start = ({navigation}) => {
-  const {weatherData, loadProducts, setText, text,time,sunrise,sunset} = useContext(WeatherContext);
+  const {weatherData, loadProducts, setText, text} = useContext(WeatherContext);
   // console.log(text);
 
   useEffect(() => {
@@ -39,16 +42,10 @@ const Start = ({navigation}) => {
         <Text style={{color: '#FFFFFF', fontSize: 20}}>
           {date.slice(0, 3).join(' ')}
         </Text>
-        <Text
-          style={{
-            color: '#FFFFFF',
-            fontSize: 35,
-            fontWeight: 'bold',
-            marginTop: 5,
-          }}>
-          {weatherData.location.name}
-        </Text>
-        <Text style={{color: '#FFFFFF'}}>{weatherData.location.country}</Text>
+        <Location
+          region={weatherData?.location?.name}
+          country={weatherData?.location?.country}
+        />
       </View>
 
       <View
@@ -62,9 +59,9 @@ const Start = ({navigation}) => {
         }}>
         <View style={{alignItems: 'center'}}>
           <Text style={{fontSize: 55, color: '#FFFFFF'}}>
-            {weatherData.current.temp_c}&deg;
+            {weatherData?.current?.temp_c}&deg;
           </Text>
-          <Text>Feels Like {weatherData.current.feelslike_c}&deg;</Text>
+          <Text>Feels Like {weatherData?.current?.feelslike_c}&deg;</Text>
           <View
             style={{
               display: 'flex',
@@ -77,90 +74,30 @@ const Start = ({navigation}) => {
               style={{height: 20, width: 20}}
             />
             <Text>
-              {weatherData.forecast.forecastday[0].day.mintemp_c}&deg;
+              {weatherData?.forecast?.forecastday[0]?.day?.mintemp_c}&deg;
             </Text>
             <Image
               source={require('../assets/arrow.png')}
               style={{height: 20, width: 20}}
             />
             <Text>
-              {weatherData.forecast.forecastday[0].day.maxtemp_c}&deg;
+              {weatherData?.forecast?.forecastday[0]?.day?.maxtemp_c}&deg;
             </Text>
           </View>
         </View>
         <View>
           <Image
-            source={{uri: `https:${weatherData.current.condition.icon}`}}
+            source={{uri: `https:${weatherData?.current?.condition?.icon}`}}
             style={{height: 150, width: 150}}
           />
         </View>
       </View>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 40,
-          marginVertical: 10,
-          color: '#FFFFFF',
-          fontWeight: 'bold',
-        }}>
-        {weatherData.current.condition.text}
-      </Text>
 
-      <View
-        style={{
-          borderBottomWidth: 1,
-          borderTopWidth: 1,
-          borderColor: '#FFFFFF',
-        }}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={time}
-          renderItem={({item}) => (
-            <View style={{paddingHorizontal: 15, marginVertical: 10, gap: 10}}>
-              <Text style={{color: '#FFFFFF'}}> {item.time}</Text>
-              <Text
-                style={{fontSize: 18, color: '#FFFFFF', fontWeight: 'bold'}}>
-                {item.temp}&deg;
-              </Text>
-            </View>
-          )}
-        />
-      </View>
+      <Text style={styles.txt}>{weatherData?.current?.condition?.text}</Text>
+      <HourReport />
 
-      <View>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={sunrise}
-          renderItem={({item}) => (
-            <View style={{paddingHorizontal: 20, marginVertical: 10, gap: 10}}>
-              <Text> {item.title}</Text>
-              <Text
-                style={{fontSize: 18, color: '#FFFFFF', fontWeight: 'bold'}}>
-                {item.val}
-              </Text>
-            </View>
-          )}
-        />
-      </View>
+      <SunRiseSet />
 
-      <View>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={sunset}
-          renderItem={({item}) => (
-            <View style={{paddingHorizontal: 20, marginVertical: 10, gap: 10}}>
-              <Text> {item.title}</Text>
-              <Text
-                style={{fontSize: 18, color: '#FFFFFF', fontWeight: 'bold'}}>
-                {item.val}
-              </Text>
-            </View>
-          )}
-        />
-      </View>
       <Pressable
         style={{alignItems: 'center', marginVertical: 20}}
         onPress={() => navigation.navigate('second')}>
@@ -189,6 +126,13 @@ const styles = StyleSheet.create({
     width: 300,
     borderRadius: 20,
     backgroundColor: '#C2E8EE',
-    padding: 10,
+    paddingLeft: 20,
+  },
+  txt: {
+    textAlign: 'center',
+    fontSize: 40,
+    marginVertical: 10,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
   },
 });
