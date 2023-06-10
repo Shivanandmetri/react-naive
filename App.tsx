@@ -1,15 +1,36 @@
-import 'react-native-gesture-handler';
-import SignUp from './components/FigmaTask/SignUp';
 import React from 'react';
-import Stacknavigation from './components/FigmaTask/stacknavigation';
-import Login from './components/FigmaTask/Login';
-import Scanned from './components/FigmaTask/Scanned';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import ContextProvider from './src/weatherApp/Context';
+import Home from './src/weatherApp/Home';
+import Start from './src/weatherApp/Start';
+import Second from './src/weatherApp/Second';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    // <Login />
-    // <Scanned />
-    <Stacknavigation />
+    <ContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{header: () => null}}
+          />
+          <Stack.Screen
+            name="start"
+            component={Start}
+            options={{header: () => null}}
+          />
+          <Stack.Screen
+            name="second"
+            component={Second}
+            options={{header: () => null}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ContextProvider>
   );
 };
 
